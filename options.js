@@ -4,11 +4,11 @@ const models = [
   'gpt-3.5-turbo'
 ];
 
-function restoreOptions() {
+const restoreOptions = () => {
   chrome.storage.sync.get(['apiKey', 'defaultModel'], (data) => {
-    document.getElementById('apiKey').value = data.apiKey || '';
-    const select = document.getElementById('defaultModel');
-    models.forEach(m => {
+    document.querySelector('#apiKey').value = data.apiKey || '';
+    const select = document.querySelector('#defaultModel');
+    models.forEach((m) => {
       const opt = document.createElement('option');
       opt.value = m;
       opt.textContent = m;
@@ -16,13 +16,13 @@ function restoreOptions() {
     });
     select.value = data.defaultModel || 'gpt-4o-mini';
   });
-}
+};
 
-document.getElementById('save').addEventListener('click', () => {
-  const apiKey = document.getElementById('apiKey').value.trim();
-  const defaultModel = document.getElementById('defaultModel').value;
+document.querySelector('#save').addEventListener('click', () => {
+  const apiKey = document.querySelector('#apiKey').value.trim();
+  const defaultModel = document.querySelector('#defaultModel').value;
   chrome.storage.sync.set({ apiKey, defaultModel }, () => {
-    const status = document.getElementById('status');
+    const status = document.querySelector('#status');
     status.textContent = 'Saved.';
     setTimeout(() => status.textContent = '', 1000);
   });
