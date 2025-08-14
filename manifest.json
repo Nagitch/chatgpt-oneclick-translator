@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "One Click Translator",
+  "version": "1.0",
+  "description": "Translate entire pages using OpenAI while preserving layout.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://api.openai.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
