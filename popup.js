@@ -4,10 +4,10 @@ const models = [
   'gpt-3.5-turbo'
 ];
 
-function loadOptions() {
+const loadOptions = () => {
   chrome.storage.sync.get(['defaultModel'], (data) => {
-    const modelSelect = document.getElementById('model');
-    models.forEach(m => {
+    const modelSelect = document.querySelector('#model');
+    models.forEach((m) => {
       const option = document.createElement('option');
       option.value = m;
       option.textContent = m;
@@ -15,12 +15,12 @@ function loadOptions() {
     });
     modelSelect.value = data.defaultModel || 'gpt-4o-mini';
   });
-}
+};
 
-document.getElementById('translate').addEventListener('click', async () => {
-  const model = document.getElementById('model').value;
+document.querySelector('#translate').addEventListener('click', async () => {
+  const model = document.querySelector('#model').value;
   const targetLang = navigator.language || 'en';
-  const status = document.getElementById('status');
+  const status = document.querySelector('#status');
   status.textContent = 'Collecting text...';
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });

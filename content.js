@@ -1,6 +1,6 @@
 let collectedNodes = [];
 
-function isVisible(node) {
+const isVisible = (node) => {
   if (node.nodeType !== Node.TEXT_NODE) return false;
   const parent = node.parentElement;
   if (!parent) return false;
@@ -11,9 +11,9 @@ function isVisible(node) {
   if (!style || style.visibility === "hidden" || style.display === "none") return false;
   if (parent.offsetParent === null && style.position !== "fixed") return false;
   return node.nodeValue.trim().length > 0;
-}
+};
 
-function getTextNodes() {
+const getTextNodes = () => {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   const nodes = [];
   let current;
@@ -23,7 +23,7 @@ function getTextNodes() {
     }
   }
   return nodes;
-}
+};
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'collectText') {
